@@ -46,5 +46,34 @@ namespace udemy_dotnet_rpg.Services.CharacterService
 			serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
 			return serviceResponse;
 		}
+
+		public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+		{
+			var serviceResponse = new ServiceResponse<GetCharacterDTO>();
+
+			try
+			{
+				var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+
+				if (character is null)
+					throw new Exception($"Character with Id '{updatedCharacter.Id}' not found.");
+
+				character.Name = updatedCharacter.Name;
+				character.HitPoints = updatedCharacter.HitPoints;
+				character.Strength = updatedCharacter.Strength;
+				character.Defense = updatedCharacter.Defense;
+				character.Intelligence = updatedCharacter.Intelligence;
+				character.Class = updatedCharacter.Class;
+
+				serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+			}
+			catch (Exception ex)
+			{
+				serviceResponse.Success = false;
+				serviceResponse.Message = ex.Message;
+			}
+
+			return serviceResponse;
+		}
 	}
 }
