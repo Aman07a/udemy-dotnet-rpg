@@ -1,6 +1,7 @@
 global using udemy_dotnet_rpg.Models;
 global using udemy_dotnet_rpg.Services.CharacterService;
 global using udemy_dotnet_rpg.DTOS.Character;
+global using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
