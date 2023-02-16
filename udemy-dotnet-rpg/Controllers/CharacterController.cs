@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using udemy_dotnet_rpg.DTOS.Character;
 
 namespace udemy_dotnet_rpg.Controllers
 {
@@ -39,6 +40,19 @@ namespace udemy_dotnet_rpg.Controllers
 		public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
 		{
 			var response = await _characterService.UpdateCharacter(updatedCharacter);
+
+			if (response.Data is null)
+			{
+				return NotFound(response);
+			}
+
+			return Ok(response);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> DeleteCharacter(int id)
+		{
+			var response = await _characterService.DeleteCharacter(id);
 
 			if (response.Data is null)
 			{
