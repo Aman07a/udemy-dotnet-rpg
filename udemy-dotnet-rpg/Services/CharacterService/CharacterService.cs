@@ -34,7 +34,7 @@ namespace udemy_dotnet_rpg.Services.CharacterService
 			_context.Characters.Add(character);
 			await _context.SaveChangesAsync();
 
-			serviceResponse.Data = 
+			serviceResponse.Data =
 				await _context.Characters
 					.Where(c => c.User!.Id == GetUserId())
 					.Select(c => _mapper.Map<GetCharacterDTO>(c))
@@ -48,7 +48,8 @@ namespace udemy_dotnet_rpg.Services.CharacterService
 
 			try
 			{
-				var character = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+				var character = await _context.Characters
+					.FirstOrDefaultAsync(c => c.Id == id && c.User!.Id == GetUserId());
 
 				if (character is null)
 					throw new Exception($"Character with Id '{id}' not found.");
@@ -58,7 +59,10 @@ namespace udemy_dotnet_rpg.Services.CharacterService
 				await _context.SaveChangesAsync();
 
 				serviceResponse.Data =
-					await _context.Characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToListAsync();
+					await _context.Characters
+						.Where(c => c.User!.Id == GetUserId())
+						.Select(c => _mapper.Map<GetCharacterDTO>(c))
+						.ToListAsync();
 			}
 			catch (Exception ex)
 			{
@@ -80,7 +84,8 @@ namespace udemy_dotnet_rpg.Services.CharacterService
 		public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
 		{
 			var serviceResponse = new ServiceResponse<GetCharacterDTO>();
-			var dbCharacter = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+			var dbCharacter = await _context.Characters
+				.FirstOrDefaultAsync(c => c.Id == id && c.User!.Id == GetUserId());
 			serviceResponse.Data = _mapper.Map<GetCharacterDTO>(dbCharacter);
 			return serviceResponse;
 		}
