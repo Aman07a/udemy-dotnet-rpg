@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using udemy_dotnet_rpg.DTOS.Character;
 
 namespace udemy_dotnet_rpg.Controllers
 {
@@ -62,6 +63,12 @@ namespace udemy_dotnet_rpg.Controllers
 			}
 
 			return Ok(response);
+		}
+
+		[HttpPost("Skill")]
+		public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> AddCharacterSkill(AddCharacterSkillDTO newCharacterSkill)
+		{
+			return Ok(await _characterService.AddCharacterSkill(newCharacterSkill));
 		}
 	}
 }
