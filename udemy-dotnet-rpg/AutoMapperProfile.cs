@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using udemy_dotnet_rpg.DTOS.Weapon;
 
 namespace udemy_dotnet_rpg
 {
@@ -11,6 +12,7 @@ namespace udemy_dotnet_rpg
 		{
 			CreateMap<Character, GetCharacterDTO>();
 			CreateMap<AddCharacterDTO, Character>();
+			CreateMap<Weapon, GetWeaponDTO>();
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace udemy_dotnet_rpg.DTOS.Character
+﻿using udemy_dotnet_rpg.DTOS.Weapon;
+
+namespace udemy_dotnet_rpg.DTOS.Character
 {
 	public class GetCharacterDTO
 	{
@@ -9,5 +11,6 @@
 		public int Defense { get; set; } = 10;
 		public int Intelligence { get; set; } = 10;
 		public RpgClass Class { get; set; } = RpgClass.Knight;
+		public GetWeaponDTO? Weapon { get; set; }
 	}
 }
