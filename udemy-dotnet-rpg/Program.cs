@@ -1,5 +1,7 @@
 global using udemy_dotnet_rpg.Models;
 global using udemy_dotnet_rpg.Services.CharacterService;
+global using udemy_dotnet_rpg.Services.WeaponService;
+global using udemy_dotnet_rpg.Services.FightService;
 global using udemy_dotnet_rpg.DTOS.Character;
 global using udemy_dotnet_rpg.DTOS.User;
 global using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using udemy_dotnet_rpg.Services.WeaponService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IWeaponService, WeaponService>();
+builder.Services.AddScoped<IFightService, FightService>();
 
 var app = builder.Build();
 
