@@ -20,5 +20,11 @@ namespace udemy_dotnet_rpg.Controllers
 		{
 			return Ok(await _fightService.WeaponAttack(request));
 		}
+
+		[HttpPost("Skill")]
+		public async Task<ActionResult<ServiceResponse<AttackResultDTO>>> SkillAttack(SkillAttackDTO request)
+		{
+			return Ok(await _fightService.SkillAttack(request));
+		}
 	}
 }
